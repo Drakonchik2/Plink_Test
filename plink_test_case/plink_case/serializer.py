@@ -5,7 +5,11 @@ from .models import ValidParametres
 class ValParSerializer(serializers.ModelSerializer):
     class Meta:
         model = ValidParametres
-        fields = ('email', 'password', 'first_name', 'last_name')
+        fields = ('email', 'password', 'first_name', 'last_name', 'ipaddress')
+
+    def create(self, validated_data):
+        validated_data['ipaddress'] = self.context.get('request').META.get("REMOTE_ADDR")
+        return ValidParametres.objects.create(**validated_data)
 
     def validate_email(self, value):
         if 'gmail' in value:

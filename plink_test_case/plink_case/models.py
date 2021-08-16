@@ -12,3 +12,4 @@ class ValidParametres(models.Model):
     password = models.CharField(max_length=16, validators=[PASSWORD_REGEX])
     first_name = models.CharField(max_length=100, validators=[FIRST_NAME_REGEX])
     last_name = models.CharField(max_length=100, validators=[LAST_NAME_REGEX])
+    ipaddress = models.GenericIPAddressField(null=True)
